@@ -1,25 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Authentication from './component/Authentication/Authentication';
+import { useSelector } from 'react-redux';
+import { RootState } from './util/Interface/type';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Root from './pages/Root';
+import Home from './pages/Home';
+import Dashboard from './component/Dashboard/Dashboard';
+import Dahsboard from './pages/Dahsboard';
+
+
 
 function App() {
+  
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: 'auth',
+          element: <Authentication/>,
+        },
+        {
+          path: 'dashboard',
+          element: <Dahsboard/>,
+        },
+      ],
+    },
+  ]);
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <h1>learn react</h1>
+     <RouterProvider router={router}/>
+    </>
   );
 }
 
